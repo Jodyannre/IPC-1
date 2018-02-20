@@ -19,7 +19,14 @@ public class IPC1Tarea3_201115018 {
     public static void main(String[] args) {
     boolean menu1Inicio = true; //Variable utilizada para mostrar el incio principal.
     boolean menu1Inicio2 = true; //Variable utilizada para mostrar el inicio de error.
+    boolean validador = false; //Variable que validará la información de usuarios ingresados, si es falso no hay usuario ingresados y muestra un mensaje, si es verdadero muestra a los usuarios ingresados. 
+    boolean validador2 = false; // Variable que validará la información de números ingresados en el menú 2.
+    boolean validador3 = false; //Variable que validará la información de números ingresados en el menú 3.
+    boolean menu4Inicio2 = false; // Variable utilizada para mostrar mensaje de error de ingreso de un número en el menú 2.2
+    int menu3Ingreso2 = 0; //Variable que guardará el número ingresado en el menú 2.
+    int contar = 0; // Variable que guarda la cantidad de dígitos del número ingresado.
     Scanner menu1Ingreso1 = new Scanner(System.in);
+    int decision3 = 0; //Variable que se utilizará para que el usuario decida si quiere salir del menú 3.
     int menu1Ingreso2; //Variable para guardar el número ingresado por el usuario.
     String nombre1 = ""; //Variables para guardar el valor de un ingreso de usuario.
     String nombre2 = ""; 
@@ -27,10 +34,9 @@ public class IPC1Tarea3_201115018 {
     String nombre4 = ""; 
     String nombre5 = "";  
     while (menu1Inicio == true){ //Ciclo que mostrará el menú principal hasta que el usuario presione 5.
-         
         if (menu1Inicio2 == true){
             System.out.println("-----------------------------------"); //Separadores.
-            System.out.println("Menú principal"); // Título del menú principal
+            System.out.println("--------- Menú principal ----------"); // Título del menú principal
             System.out.println("-----------------------------------");
             System.out.println("1. Usuarios\n2. Contador de dígitos\n3. Tres números de mayor a menor\n4. Calcular promedio\n5. Salir"); //Opciones del menú principal.
             System.out.println("-----------------------------------");
@@ -56,12 +62,11 @@ public class IPC1Tarea3_201115018 {
                         boolean menu2Inicio2 = true; //Variable de validación para el menú 1.1                         
                         Scanner menu2Ingreso1 = new Scanner(System.in); //Scanner para ingreso de un dato.
                         int menu2Ingreso2; //Variable que guardará el dato ingresado.
-                        Scanner menu2Nombre = new Scanner(System.in); //Variable que solicitara el ingreso de nombres en el meno ingresar usuarios.
-                        boolean validador = false; //Variable que validará la información de usuarios ingresados, si es falso no hay usuario ingresados y muestra un mensaje, si es verdadero muestra a los usuarios ingresados.
+                        Scanner menu2Nombre = new Scanner(System.in); //Variable que solicitara el ingreso de nombres en el meno ingresar usuarios. 
                         while (menu2Inicio == true){ //Mientras sea verdadero mostrará el menú 1.1
                             if (menu2Inicio2 == true){ //Mientras sea verdadero mostrará el menú de bienvenida 1.1
                                 System.out.println("-----------------------------------"); //Separadores
-                                System.out.println("Menú usuarios"); //Título
+                                System.out.println("---------- Menú usuarios ----------"); //Título
                                 System.out.println("-----------------------------------");
                                 System.out.println("1. Ingresar usuarios\n2. Mostrar usuarios ascendente\n3. Mostrar Usuarios descendente\n4. Menú Principal"); //Opciones
                                 System.out.println("-----------------------------------");
@@ -93,7 +98,7 @@ public class IPC1Tarea3_201115018 {
                                 menu2Inicio = true; // Cuando termine el ingreso de datos el while volverá a ejecutarse.
                                 menu2Inicio2 = true; //Mostrará el menú inicial.
                                         System.out.println("-----------------------------------");
-                                        System.out.println("Ingresar usuarios"); //Instrucciones.
+                                        System.out.println("-------- Ingresar usuarios --------"); //Instrucciones.
                                         System.out.println("-----------------------------------");
                                         System.out.println("Ingrese primer usuario"); //Instrucciones.
                                         System.out.println("-----------------------------------");
@@ -162,29 +167,38 @@ public class IPC1Tarea3_201115018 {
                                 System.out.println("Mostrar usuarios ascendentes");
                                 System.out.println("-----------------------------------"); 
                                 if (validador == true){ //Sí el validador es verdadero mostrará los datos ingresados por el usuario.
-                                  System.out.println(nombre5+"\n"+nombre4+"\n"+nombre3+"\n"+nombre2+"\n"+nombre1); //Muestra en orden ascendente los nombres de los usuario ingresados.
+                                  System.out.println(nombre1+"\n"+nombre2+"\n"+nombre3+"\n"+nombre4+"\n"+nombre5); //Muestra en orden ascendente los nombres de los usuario ingresados.
                                   System.out.println("-----------------------------------");
                                 } else {
                                     System.out.println("No hay usuarios registrados"); //Sí el validador es falso, el usuario no ingreso datos.
+                                System.out.println("-----------------------------------");                                    
                                 }                             
                                 menu2Inicio2 = true;
+                                System.out.println("¿Desea regresar al menú anterior o salir del programa?");
                                 System.out.println("-----------------------------------");
-                                System.out.println("¿Desea regresar al menú principal o salir del programa?");
-                                System.out.println("-----------------------------------");
-                                System.out.println("Pulse 1 para regresar al menú.\nPulse 0 para salir del programa.");
+                                System.out.println("Pulse 2 para regresar al menú.\nPulse 1 para salir del programa.");
                                 System.out.println("-----------------------------------");
                                 decision = decisionyn.nextInt(); //Solicitud de decisión.
-                                if (decision == 1){ //Si es 1 se desactiva el while del menú 1.1 y se activa del while del menú principal, mostrando de nuevo el menú principal.
-                                    menu2Inicio = false;
-                                    menu1Inicio2 = true;
-                                } else if (decision == 0) { //Termina el while del menú 1.1 y del menú principal, finalizando el programa.
-                                    menu2Inicio = false;
-                                    menu1Inicio2 = true;
-                                    menu1Inicio = false;
-                                }
-                            } else{
-                                ;
-                            }
+                                        while (decision > 0 && decision != -1 ){
+                                            switch (decision){
+                                                case 1:
+                                                    menu2Inicio = false;
+                                                    menu1Inicio2 = true;
+                                                    menu1Inicio = false;
+                                                    decision = -1;                                                   
+                                                    break;
+                                                case 2:
+                                                    menu2Inicio = true;
+                                                    decision = -1;
+                                                    break;
+                                                default:
+                                                    System.out.println("-----------------------------------");                                                   
+                                                    System.out.println("Error, ingrese un número válido");
+                                                    System.out.println("-----------------------------------");                                                    
+                                                    decision = decisionyn.nextInt();
+                                            }                                           
+                                        }   
+                                }        
                             if (menu2Ingreso2 == 3){
                                 menu2Inicio = true; //Activa el menú 1.1
                                 Scanner decisionyn = new Scanner (System.in); //Escaner que servirá para pedirle al usuario que ingrese un "si" o un "no", para salir del programa o ir a otra sección.
@@ -197,35 +211,281 @@ public class IPC1Tarea3_201115018 {
                                   System.out.println("-----------------------------------");
                                 } else {
                                     System.out.println("No hay usuarios registrados");
+                                System.out.println("-----------------------------------");                                    
                                 }  
                                 menu2Inicio2 = true;
+                                System.out.println("¿Desea regresar al menú anterior o salir del programa?");
                                 System.out.println("-----------------------------------");
-                                System.out.println("¿Desea regresar al menú principal o salir del programa?");
+                                System.out.println("Pulse 2 para regresar al menú.\nPulse 1 para salir del programa.");
                                 System.out.println("-----------------------------------");
-                                System.out.println("Pulse 1 para regresar al menú.\nPulse 0 para salir del programa.");
-                                System.out.println("-----------------------------------");
-                                decision = decisionyn.nextInt();
-                                if (decision == 1){
-                                    menu2Inicio = false;
-                                    menu1Inicio2 = true;
-                                } else if (decision == 0) {
-                                    menu2Inicio = false;
-                                    menu1Inicio2 = true;
-                                    menu1Inicio = false;
-                                }
-                            } else{
-                                ; //No es necesario.
+                                decision = decisionyn.nextInt();                             
+                                        while (decision > 0 && decision != -1 ){
+                                            switch (decision){
+                                                case 1:
+                                                    menu2Inicio = false;
+                                                    menu1Inicio2 = true;
+                                                    menu1Inicio = false;
+                                                    decision = -1;                                                    
+                                                    break;
+                                                case 2:                                                   
+                                                    menu2Inicio = true;
+                                                    decision = -1;
+                                                    break;
+                                                default:
+                                                    System.out.println("-----------------------------------");                                                   
+                                                    System.out.println("Error, ingrese un número válido");
+                                                    System.out.println("-----------------------------------");                                                    
+                                                    decision = decisionyn.nextInt();
+                                            }                                           
+                                        }                            
                             }                            
                         }         
                     break; //Finalización de ciclo.
                 case 2:
-                    System.out.println("Menú 2");
+                        boolean menu3Inicio = true; //Variable de validación para el menú 2.1
+                        boolean menu3Inicio2 = true; //Variable de validación para el menú 2.1                         
+                        Scanner menu3Ingreso1 = new Scanner(System.in); //Scanner para ingreso de un dato.
+                        Scanner menu3Numero = new Scanner(System.in); //Variable que solicitara el ingreso de nombres en el meno ingresar usuarios.
+                        Scanner decision3i = new Scanner(System.in); // Escanea la decisión de salir o permanecer en el menú.
+                        while (menu3Inicio == true){ //Mientras sea verdadero mostrará el menú 2.1
+                            if (menu3Inicio2 == true){ //Mientras sea verdadero mostrará el menú de bienvenida 2.1
+                                System.out.println("-----------------------------------"); //Separadores
+                                System.out.println("------- Contador de dígitos -------"); //Título
+                                System.out.println("-----------------------------------");
+                                System.out.println("1. Ingresar número\n2. Mostrar número de dígitos\n3. Menú principal"); //Opciones
+                                System.out.println("-----------------------------------");
+                                System.out.println("Ingrese un número"); //Instrucciones
+                                System.out.println("-----------------------------------");
+                                menu3Inicio2 = false; // Mientras sea falso evitara que el usuario vea de nuevo la pantalla de bienvenida al menú 2.1
+                                menu3Ingreso2 = menu3Ingreso1.nextInt(); //Solicita el ingreso de un dato para proseguir.
+                            } else {
+                                System.out.println("-----------------------------------");
+                                System.out.println("Incorrecto, ingrese otro número"); 
+                                System.out.println("-----------------------------------");
+                                menu3Ingreso2 = menu3Ingreso1.nextInt();
+                                menu3Inicio2 = false; // Mientras sea falso el usuario no regresará al menú principal, hasta que ingrese un valor correcto.
+                            }
+                            if (menu3Ingreso2 > 3){ // Si es mayor a 3 lanzará un error y volvera a la sección de "Incorrecto, ingrese otro número".
+                                menu3Inicio = true; // El while volverá a ejecutarse.
+                                menu3Inicio2 = false; // Mientras sea falso el usuario regresará a la opción de "Incorrecto".
+                            } else { 
+                                ;
+                            }  
+                            if (menu3Ingreso2 == 3){ // Si es 4 menu2Inicio niega la ejecución del while y regresará al menú principal.    
+                                menu3Inicio = false;
+                                menu3Inicio2 = true; // Activa de nuevo el while del menú principal.
+                            } else {
+                                ;
+                            }
+                            switch (menu3Ingreso2){
+                                case 1: 
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Ingrese un número mayor a 0 y menor a 100000"); //Instrucciones.
+                                        System.out.println("-----------------------------------");
+                                        
+                                        do { //Solilcita el ingreso del 2do nombre antes de verificar si el dato ya existe.                                        
+                                            menu3Ingreso2 = menu3Ingreso1.nextInt();
+                                            if (menu3Ingreso2 > 100000){ // Si es igual al único ingreso registrado se mostrará un error.
+                                              System.out.println("-----------------------------------");  
+                                              System.out.println("Error, número mayor a 100000\nIngrese otro número");
+                                              System.out.println("-----------------------------------");                                              
+                                            } else {
+                                                ; //Sin segunda opción, fin.
+                                            }
+                                        } while (menu3Ingreso2 > 100000); // Mientras sean iguales el usuario deberá ingresar otro valor.
+                                        while (menu3Ingreso2 != 0){ // Mientras el dígito sea diferente de 0 lo dividira dentro de 10 restando una cifra en cada ciclo.
+                                            menu3Ingreso2 = menu3Ingreso2/10;
+                                            contar = contar + 1; //Contador de dígitos
+                                        }                                        
+                                        menu3Inicio2 = true; // Activa pantalla inicial del menú 3.
+                                        menu4Inicio2 = true; // Activa pantalla inicial del menú 2.2                                         
+                                        break;
+                                case 2:
+                                        if (menu4Inicio2 == true){
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("La cantidad de dígitos del número es"); //Instrucciones.
+                                        System.out.println("-----------------------------------");    
+                                        System.out.println(+contar); // Puclica la variable con el número de dígitos.
+                                        } else {
+                                        System.out.println("-----------------------------------");                                             
+                                        System.out.println("Aún no ha ingresado ningún valor");                                             
+                                        }
+                                        menu4Inicio2 = false; //Deshabilida la publicación del número de dígitos anterior, es neceario ingrear uno nuevo.                                        
+                                        menu3Inicio2 = true; // Habilita la pantalla inicial del menú 3.
+                                        break;    
+                            }
+                                System.out.println("-----------------------------------");
+                                System.out.println("¿Desea regresar al menú anterior o salir del programa?");
+                                System.out.println("-----------------------------------");
+                                System.out.println("Pulse 2 para regresar al menú.\nPulse 1 para salir del programa.");
+                                System.out.println("-----------------------------------");
+                                decision3 = decision3i.nextInt(); //Solicitud de decisión.
+                                        while (decision3 > 0 && decision3 != -1 ){
+                                            switch (decision3){
+                                                case 1:
+                                                    menu3Inicio = false;
+                                                    menu1Inicio2 = true;
+                                                    menu1Inicio = false;
+                                                    decision3 = -1;                                                   
+                                                    break;
+                                                case 2:
+                                                    menu3Inicio = true;
+                                                    menu3Inicio2 = true;
+                                                    decision3 = -1;
+                                                    break;
+                                                default:
+                                                    System.out.println("-----------------------------------");                                                   
+                                                    System.out.println("Error, ingrese un número válido");
+                                                    System.out.println("-----------------------------------");                                                    
+                                                    decision3 = decision3i.nextInt();
+                                            }                                           
+                                        }                             
+                        }              
+                    menu1Inicio2 = true;
+                    break;             
+                case 3:
+                        boolean menu4Inicio = true; //Variable de validación para el menú 2.1
+                        boolean menu5Inicio2 = true; //Variable de validación para el menú 2.1                         
+                        Scanner menu4Ingreso1 = new Scanner(System.in); //Scanner para ingreso de un dato.
+                        Scanner menu4Numero = new Scanner(System.in); //Variable que solicitara el ingreso de nombres en el meno ingresar usuarios.
+                        int menu4Ingreso2;
+                        int numero1;
+                        int numero2;
+                        int numero3;
+                        int mayor = 0;
+                        int medio = 0;
+                        int menor = 0;
+                        while (menu4Inicio == true){ //Mientras sea verdadero mostrará el menú 2.1
+                            if (menu5Inicio2 == true){ //Mientras sea verdadero mostrará el menú de bienvenida 2.1
+                                System.out.println("-----------------------------------"); //Separadores
+                                System.out.println("-- Tres número de mayor a menor  --"); //Título
+                                System.out.println("-----------------------------------");
+                                System.out.println("1. Ingresar números\n2. Mostrar ordenados\n3. Menú principal"); //Opciones
+                                System.out.println("-----------------------------------");
+                                System.out.println("Ingrese un número"); //Instrucciones
+                                System.out.println("-----------------------------------");
+                                menu5Inicio2 = false; // Mientras sea falso evitara que el usuario vea de nuevo la pantalla de bienvenida al menú 2.1
+                                menu4Ingreso2 = menu4Ingreso1.nextInt(); //Solicita el ingreso de un dato para proseguir.
+                            } else {
+                                System.out.println("-----------------------------------");
+                                System.out.println("Incorrecto, ingrese otro número"); 
+                                System.out.println("-----------------------------------");
+                                menu4Ingreso2 = menu4Ingreso1.nextInt();
+                                menu4Inicio2 = false; // Mientras sea falso el usuario no regresará al menú principal, hasta que ingrese un valor correcto.
+                            }
+                            if (menu4Ingreso2 > 3){ // Si es mayor a 3 lanzará un error y volvera a la sección de "Incorrecto, ingrese otro número".
+                                menu4Inicio = true; // El while volverá a ejecutarse.
+                                menu5Inicio2 = false; // Mientras sea falso el usuario regresará a la opción de "Incorrecto".
+                            } else { 
+                                ;
+                            }  
+                            if (menu4Ingreso2 == 3){ // Si es 4 menu2Inicio niega la ejecución del while y regresará al menú principal.    
+                                menu4Inicio = false;
+                                menu1Inicio2 = true; // Activa de nuevo el while del menú principal.
+                            } else {
+                                ;
+                            }
+                            switch (menu4Ingreso2){
+                                case 1: 
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("-------- Ingrese 3 número  --------"); //Instrucciones.
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Ingrese primer número"); //Instrucciones.
+                                        System.out.println("-----------------------------------");
+                                        numero1 = menu4Numero.nextInt(); //Guarda el dato del primer usuario.
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Ingrese segundo número"); //Instrucciones.
+                                        System.out.println("-----------------------------------");
+                                        numero2 = menu4Numero.nextInt(); //Guarda el dato del primer usuario.
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Ingrese tercer número"); //Instrucciones.
+                                        System.out.println("-----------------------------------");
+                                        numero3 = menu4Numero.nextInt(); //Guarda el dato del primer usuario.
+                                        if (numero1 > numero2){ //Sentencias if para definar núermo mayor, medio y menor.
+                                            if (numero1 > numero3){
+                                                mayor = numero1;
+                                            } else {
+                                                mayor = numero3;
+                                                medio = numero1;
+                                                menor = numero2;
+                                            }
+                                            if (mayor == numero3){
+                                                mayor = numero3;
+                                                medio = numero1;
+                                                menor = numero2;                                            
+                                            } else if (numero3 > numero2){
+                                                medio = numero3;
+                                                menor = numero2;
+                                            } else {
+                                                medio = numero2;
+                                                menor = numero3;
+                                            }
+                                        } else if (numero2 > numero3){
+                                            mayor = numero2;
+                                            if (numero3 > numero1){
+                                                medio = numero3;                                                
+                                            } else{
+                                                medio = numero1;
+                                                menor = numero3;
+                                            }
+                                        } else {
+                                            menor = numero1;
+                                            medio = numero2;
+                                            mayor = numero3;
+                                        }
+                                        menu5Inicio2 = true; //Activa la pantalla principal del menú.
+                                        validador3 = true; //Activa validación de la opción 2 del menú.
+                                        break;
+                                case 2:
+                                        int decision;
+                                        Scanner decisionyn = new Scanner (System.in); //Escaner que servirá para pedirle al usuario que ingrese un "si" o un "no", para salir del programa o ir a otra sección.
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Mostrar números ordenados");
+                                        System.out.println("-----------------------------------");
+                                        if (validador3 == true){ //Validador que determina si el usuario ingreso datos.
+                                            System.out.println(mayor+" "+medio+" "+menor+"\n"); //Escribir números de mayor a menor.
+                                            System.out.println("-----------------------------------");
+                                        } else {
+                                            System.out.println("No ha ingresado ningún número");
+                                            System.out.println("-----------------------------------");                                    
+                                        }  
+                                        menu5Inicio2 = true;
+                                        validador3 = false;
+                                        System.out.println("¿Desea regresar al menú anterior o salir del programa?");
+                                        System.out.println("-----------------------------------");
+                                        System.out.println("Pulse 1 para regresar al menú.\nPulse 0 para salir del programa.");
+                                        System.out.println("-----------------------------------");
+                                        decision = decisionyn.nextInt();
+                                        while (decision > 0 && decision != -1 ){
+                                            switch (decision){
+                                                case 0:
+                                                    menu4Inicio = true;
+                                                    decision = -1;
+                                                    break;
+                                                case 1:
+                                                    menu4Inicio = false;
+                                                    menu1Inicio2 = true;
+                                                    menu1Inicio = false;
+                                                    decision = -1;
+                                                    break;
+                                                default:
+                                                    System.out.println("-----------------------------------");                                                   
+                                                    System.out.println("Error, ingrese un número válido");
+                                                    System.out.println("-----------------------------------");                                                    
+                                                    decision = decisionyn.nextInt();
+                                            }                                           
+                                        }
+                                        break;    
+                            }                            
+                        }              
                     menu1Inicio2 = true;
                     break;
-                case 3:
-                    System.out.println("Menú 3");
-                    menu1Inicio2 = true;                    
-                    break;
+                    
+                    
+                    
+
+                    
+                    
                 case 4:
                     System.out.println("Menú 4");
                     menu1Inicio2 = true;
